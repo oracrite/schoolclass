@@ -1,14 +1,14 @@
-from flask import Flask
+from fastapi import FastAPI
+import os
 
-# 'app'이라는 이름으로 플라스크 객체를 만듭니다. (gunicorn이 이걸 찾습니다!)
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route("/")
-def home():
-    return "Hello, Cloud Run! 배포 성공!"
+@app.get("/")
+def read_root():
+    return {"message": "안녕하세요! GitHub Actions를 통해 Cloud Run에 배포된 앱입니다."}
 
 if __name__ == "__main__":
-    import os
-    # 혹시 모를 로컬 테스트용 코드
+    import uvicorn
+    # Cloud Run은 환경 변수 PORT를 통해 포트 번호를 전달합니다. (기본값 8080)
     port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
+    uvicorn.run(app, host="0.0.0.0", port=port)
