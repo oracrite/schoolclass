@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "안녕하세요! GitHub Actions를 통해 Cloud Run에 배포된 앱입니다."}
+    return {"message": "안녕하세요! GitHub Actions를 통해 Cloud Run에 ."}
 
 if __name__ == "__main__":
     import uvicorn
